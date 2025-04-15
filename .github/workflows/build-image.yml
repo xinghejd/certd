@@ -55,12 +55,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to aliyun container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cn-shenzhen.aliyuncs.com
-          username: ${{ secrets.aliyun_cs_username }}
-          password: ${{ secrets.aliyun_cs_password }}
+      # - name: Login to aliyun container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: registry.cn-shenzhen.aliyuncs.com
+      #     username: ${{ secrets.aliyun_cs_username }}
+      #     password: ${{ secrets.aliyun_cs_password }}
 
       - name: Login to GitHub Packages
         uses: docker/login-action@v3
@@ -69,11 +69,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
   
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.dockerhub_username }}
-          password: ${{ secrets.dockerhub_password }}
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.dockerhub_username }}
+      #     password: ${{ secrets.dockerhub_password }}
 
       - name: Build default platforms
         uses: docker/build-push-action@v6
@@ -82,25 +82,25 @@ jobs:
           push: true
           context: ./packages/ui/
           tags: |
-            registry.cn-shenzhen.aliyuncs.com/handsfree/certd:latest
-            registry.cn-shenzhen.aliyuncs.com/handsfree/certd:${{steps.get_certd_version.outputs.result}}
-            greper/certd:latest
-            greper/certd:${{steps.get_certd_version.outputs.result}}
+            # registry.cn-shenzhen.aliyuncs.com/handsfree/certd:latest
+            # registry.cn-shenzhen.aliyuncs.com/handsfree/certd:${{steps.get_certd_version.outputs.result}}
+            # greper/certd:latest
+            # greper/certd:${{steps.get_certd_version.outputs.result}}
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{steps.get_certd_version.outputs.result}}
-      - name: Build armv7
-        uses: docker/build-push-action@v6
-        with:
-          platforms: linux/arm/v7
-          push: true
-          context: ./packages/ui/
-          tags: |
-            registry.cn-shenzhen.aliyuncs.com/handsfree/certd:armv7
-            registry.cn-shenzhen.aliyuncs.com/handsfree/certd:${{steps.get_certd_version.outputs.result}}-armv7
-            greper/certd:armv7
-            greper/certd:${{steps.get_certd_version.outputs.result}}-armv7
-            ghcr.io/${{ github.repository }}:armv7
-            ghcr.io/${{ github.repository }}:${{steps.get_certd_version.outputs.result}}-armv7
+            # ghcr.io/${{ github.repository }}:${{steps.get_certd_version.outputs.result}}
+      # - name: Build armv7
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     platforms: linux/arm/v7
+      #     push: true
+      #     context: ./packages/ui/
+      #     tags: |
+      #       registry.cn-shenzhen.aliyuncs.com/handsfree/certd:armv7
+      #       registry.cn-shenzhen.aliyuncs.com/handsfree/certd:${{steps.get_certd_version.outputs.result}}-armv7
+      #       greper/certd:armv7
+      #       greper/certd:${{steps.get_certd_version.outputs.result}}-armv7
+      #       ghcr.io/${{ github.repository }}:armv7
+      #       ghcr.io/${{ github.repository }}:${{steps.get_certd_version.outputs.result}}-armv7
 
 #      - name: Build agent
 #        uses: docker/build-push-action@v6
