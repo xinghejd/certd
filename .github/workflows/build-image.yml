@@ -81,13 +81,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           context: ./packages/ui/
-          tags: |
-            # registry.cn-shenzhen.aliyuncs.com/handsfree/certd:latest
-            # registry.cn-shenzhen.aliyuncs.com/handsfree/certd:${{steps.get_certd_version.outputs.result}}
-            # greper/certd:latest
-            # greper/certd:${{steps.get_certd_version.outputs.result}}
-            ghcr.io/${{ github.repository }}:latest
-            # ghcr.io/${{ github.repository }}:${{steps.get_certd_version.outputs.result}}
+          tags: ghcr.io/${{ github.repository }}:latest
       # - name: Build armv7
       #   uses: docker/build-push-action@v6
       #   with:
